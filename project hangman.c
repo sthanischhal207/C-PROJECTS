@@ -10,13 +10,25 @@ void game();
 int num,i,j,length,mistake=0,h=10,m=10,x,l=10,H=10,play_again;
 char word[100],given,guess[100];
 
-static char words[100][100] ={"apple","banana","orange","grape","strawberry",
-	"pineapple","watermelon","kiwi","peach","pear","apricot","blueberry","cherry",
-	"coconut","lemon","lime","mango","papaya","raspberry","blackberry","avocado","fig",
-	"plum","cranberry","pomegranate","nectarine","melon","tangerine","grapefruit",
-	"guava","passionfruit","persimmon","dragonfruit","lychee","kiwifruit","starfruit",
-	"quince","boysenberry","mulberry","elderberry","gooseberry","cantaloupe",
-	"honeydew","rhubarb","kumquat","date","plantain","durian","jackfruit"};
+static char words[200][200] ={"adventure", "apartment", 
+	"beautiful", "celebration", "character", "classical", "community", "condition", "contribute", 
+	"creativity", "dangerous", "definition", "democratic", "department", "difference", "difficulty", 
+	"direction", "discussion", "education", "emergency", "employment", "enthusiasm", "environment", 
+	"expression", "foundation", "friendship", "government", "happiness", "historical", "important", 
+	"innovation", "inspiration", "intelligent", "interesting", "investment", "knowledge", 
+	"leadership", "literature", "management", "motivation", "negotiation", "opportunity", 
+	"performance", "philosophy", "population", "practical", "preference", "president", "protection",
+	 "reflection", "relationship", "reputation", "responsible", "satisfaction", "scientific", 
+	 "situation", "technology", "television", "understand", "volunteer", "wonderful", "abundance", 
+	 "advertising", "assignment", "atmosphere", "attraction", "basketball", "breakfast", "challenging",
+	"chemistry", "confidence", "consistent", "continuous", "convenience", "corporation", "curriculum",
+	"decoration", "dependency", "depression", "determined", "disadvantage", "discipline", "evaluation",
+	"experience", "experiment", "exploration", "expression", "fascinating", "foundation", "imagination",
+	 "independent", "information", "inspiration", "introduction", "journalist", "leadership", 
+	 "mathematics", "negotiation", "observatory", "opportunity", "population", "preparation", 
+	"productive", "programming", "reliability", "restaurant", "sustainable", "technology", 
+	"university", "visibility", "volunteering", "willingness", "xylophone", "youthfulness", 
+	"zoological"};
 
 static char excess[5][35]=
 {
@@ -56,11 +68,11 @@ int main()
 	printf("\t------Welcome to Hang Man-------\n");
 	graphics();
 retreat:
-	printf("\nEnter Any Number Between 1 & 50: ");
+	printf("\nEnter Any Number Between 1 & 115: ");
 	scanf("%d",&num);
 	num=num-1;
 	
-	if(num<=50)
+	if(num<=115)
 	{
 		for(i=0;i<20;i++)
 		{
@@ -136,7 +148,7 @@ void graphics()
 
 void win()
 {
-	printf("\n\n--------YOU WIN!--------");
+	printf("\n\n--------YOU WIN!--------\n\n ANSWER: '%s'",word);
 }
 void loose()
 {
