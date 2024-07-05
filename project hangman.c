@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <time.h>
 
 void graphics();
 void win();
@@ -70,8 +68,8 @@ int main()
 	printf("\t------Welcome to Hang Man-------\n");
 	graphics();
 retreat:
-	srand(time(NULL));
-    num = rand() % 115 + 1;
+	   printf("\nEnter any number between 1-115: ");
+    scanf("%d",&num);
 	   num = num-1;
 	if(num<=115)
 	{
