@@ -9,7 +9,7 @@ void loose();
 void game();
 
 
-int num,i,j,length,mistake=0,h=10,m=10,x,l=10,H=10,play_again,num;
+int num,i,j,length,mistake=0,h=10,m=10,x,l=10,H=10,play_again;
 char word[100],given,guess[100];
 
 static char words[200][200] ={"adventure", "apartment", 
@@ -72,7 +72,7 @@ int main()
 retreat:
 	srand(time(NULL));
     num = rand() % 115 + 1;
-	
+	   num = num-1;
 	if(num<=115)
 	{
 		for(i=0;i<20;i++)
