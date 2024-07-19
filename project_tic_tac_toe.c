@@ -158,11 +158,17 @@ void graphics()
 int num_check(int n)
 {
     int i;
+    if(n==0)
+    {
+        printf("\n\nInvalid Input\n");
+        game();
+
+    }
     for(i=0;i<9;i++)
     {
         if(data[i]==n)
         {
-            return 2;
+            return 1;
         }
     }
     return 0;
