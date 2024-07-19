@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <time.h>
 
 void graphics();
 void win();
@@ -9,7 +7,7 @@ void loose();
 void game();
 
 
-int num,i,j,length,mistake=0,h=10,m=10,x,l=10,H=10,play_again,num;
+int num,i,j,length,mistake=0,h=10,m=10,x,l=10,H=10,play_again;
 char word[100],given,guess[100];
 
 static char words[200][200] ={"adventure", "apartment", 
@@ -65,14 +63,15 @@ static char head[5][35]=
 	"   **            *           *",
 	"   **          *               *"
 	};
+	int choose_Word();
 int main()
 {
 	printf("\t------Welcome to Hang Man-------\n");
 	graphics();
 retreat:
-	srand(time(NULL));
-    num = rand() % 115 + 1;
-	
+	   printf("\nEnter any number between 1-115: ");
+    scanf("%d",&num);
+	   num = num-1;
 	if(num<=115)
 	{
 		for(i=0;i<20;i++)
