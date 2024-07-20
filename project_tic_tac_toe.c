@@ -100,13 +100,13 @@ void replace_box(int i, int j,int c)
     }
     graphics();
     char result = win_loose_draw();
-    if(result != '0')
+    if(result != 'N')
     {
         printf("\n\nPlayer %c Wins!", result);
         again();
 
     }
-    else if(result == '0' && c==9)
+    else if(result == 'N' && c==9)
     {
         printf("\n\nGame is Draw");
         again();
@@ -125,20 +125,20 @@ char win_loose_draw()
     }
     for(i=1;i<=9;i+=4)
     {
-        if(board[0][i] == board[3][i] && board[0][i] == board[5][i]) //Check Vertical Columns
+        if(board[0][i] == board[2][i] && board[0][i] == board[4][i]) //Check Vertical Columns
         {
             return board[0][i];
         }
     }
-    if(board[0][1] == board[3][5] && board[0][1] == board[5][9]) //Check main diagonal
+    if(board[0][1] == board[2][5] && board[0][1] == board[4][9]) //Check main diagonal
         {
             return board[0][1];
         }
-    else if(board[0][9] == board[3][5] && board[0][9] == board[5][1]) //Check secondry diagonal
+    else if(board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondry diagonal
         {
             return board[0][9];
         }
-    return '0';
+    return 'N';
 }
 
 void graphics()
