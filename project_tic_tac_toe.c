@@ -6,15 +6,17 @@ void game();
 void replace_box(int i, int j,int c);
 char win_loose_draw();
 void again();
+void board_re();
 int num_check(int n);
 
 static int data[9];
-static char board[5][15] = {
-    " 1 | 2 | 3 ",
-    "-----------",
-    " 4 | 5 | 6 ",
-    "-----------",
-    " 7 | 8 | 9 ",
+
+static char board[5][65] = {
+    "   |   |                    1 | 2 | 3 ",
+    "-----------                -----------",
+    "   |   |                    4 | 5 | 6 ",
+    "-----------                -----------",
+    "   |   |                    7 | 8 | 9 ",
 };
 static int choice;
 
@@ -34,6 +36,7 @@ void again()
     scanf("%c",&ch);
     if(ch=='y')
     {
+        board_re();
         main();
     }
     else{
@@ -118,24 +121,28 @@ char win_loose_draw()
     int i;
     for(i=0;i<=5;i+=2)
     {
-        if(board[i][1] == board[i][5] && board[i][1] == board[i][9]) //Check Horizontal Rows
+        if(board[i][1]!=' ' && board[i][1] == board[i][5] && board[i][1] == board[i][9]) //Check Horizontal Rows
         {
+            printf("1");
             return board[i][1];
         }
     }
     for(i=1;i<=9;i+=4)
     {
-        if(board[0][i] == board[2][i] && board[0][i] == board[4][i]) //Check Vertical Columns
+        if(board[0][i]!=' ' && board[0][i] == board[2][i] && board[0][i] == board[4][i]) //Check Vertical Columns
         {
+            printf("1");
             return board[0][i];
         }
     }
-    if(board[0][1] == board[2][5] && board[0][1] == board[4][9]) //Check main diagonal
+    if(board[0][1]!=' ' && board[0][1] == board[2][5] && board[0][1] == board[4][9]) //Check main diagonal
         {
+            printf("3");
             return board[0][1];
         }
-    else if(board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondry diagonal
+    else if(board[0][9]!=' ' && board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondry diagonal
         {
+            printf("4");
             return board[0][9];
         }
     return 'N';
@@ -147,7 +154,7 @@ void graphics()
     printf("\n\n");
     for(i = 0 ; i < 5 ; i++ )
     {
-        for(j = 0 ; j < 15 ; j++)
+        for(j = 0 ; j < 65 ; j++)
         {
             printf("%c",board[i][j]);
         }
@@ -172,4 +179,15 @@ int num_check(int n)
         }
     }
     return 0;
+}
+void board_re()
+{
+    int i,j;
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 65; j++) {
+            if (board[i][j] == 'X' || board[i][j] == 'O'){
+                board[i][j] = ' '; // Reset character to space
+            }
+        }
+    }
 }
