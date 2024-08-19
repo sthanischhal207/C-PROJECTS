@@ -69,9 +69,9 @@ int main()
 	printf("\t------Welcome to Hang Man-------\n");
 	graphics();
 retreat:
-	   printf("\nEnter any number between 1-115: ");
-    scanf("%d",&num);
-	   num = num-1;
+	   	printf("\nEnter any number between 1-115: ");
+    	scanf("%d",&num);
+	   	num = num-1;
 	if(num<=115)
 	{
 		for(i=0;i<20;i++)

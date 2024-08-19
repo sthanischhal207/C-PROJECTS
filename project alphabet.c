@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 
 int main() {
-  char alphabet[100],c;
+  char alphabet[0],c;
   int i,j,k,N,a,n,l;
-  printf("Enter a word:\n[USE ' _ ' (BAR) INSTEAD OF ' ' (SPACE)] ");
-  scanf("%s",&alphabet);
-  for(l=0;l<100;l++) 
+  printf("Enter a Sentence You want to print: ");
+  scanf("%[^\n]s", alphabet);
+  for(l=0;l<strlen(alphabet);l++) 
   {
     c=alphabet[l];
     switch(c){
@@ -2169,7 +2170,7 @@ printf("\n");
 
 
 
-case'_':
+case' ':
 for(i=1;i<=4;i++)
 {
 	printf("\n");

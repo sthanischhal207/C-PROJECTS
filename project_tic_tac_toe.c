@@ -43,10 +43,10 @@ void again()
         exit(0);
     }
 }
+static int cnt=0;
 
 void game()
 {
-    static int cnt=0;
     int i,j,x;
     for(x=1;x<=9;x++){
         printf("\n\nPlayer ");
@@ -123,7 +123,6 @@ char win_loose_draw()
     {
         if(board[i][1]!=' ' && board[i][1] == board[i][5] && board[i][1] == board[i][9]) //Check Horizontal Rows
         {
-            printf("1");
             return board[i][1];
         }
     }
@@ -131,18 +130,15 @@ char win_loose_draw()
     {
         if(board[0][i]!=' ' && board[0][i] == board[2][i] && board[0][i] == board[4][i]) //Check Vertical Columns
         {
-            printf("1");
             return board[0][i];
         }
     }
     if(board[0][1]!=' ' && board[0][1] == board[2][5] && board[0][1] == board[4][9]) //Check main diagonal
         {
-            printf("3");
             return board[0][1];
         }
     else if(board[0][9]!=' ' && board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondry diagonal
         {
-            printf("4");
             return board[0][9];
         }
     return 'N';
@@ -154,6 +150,7 @@ void graphics()
     printf("\n\n");
     for(i = 0 ; i < 5 ; i++ )
     {
+        printf("\t");
         for(j = 0 ; j < 65 ; j++)
         {
             printf("%c",board[i][j]);
@@ -190,4 +187,9 @@ void board_re()
             }
         }
     }
+    for(i=0;i<9;i++)
+    {
+        data[i]= ' ';
+    }
+    cnt=0;
 }

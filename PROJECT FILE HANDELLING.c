@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-char name[100],filename[100],date[100],history[100000000],reason[10000];
+char name[0],filename[0],date[0],history[0],reason[0];
 int room_no,choice1,choice2,amount,ans,choice,retreat;
 
 void initial_data_storing()
