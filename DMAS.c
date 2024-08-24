@@ -113,10 +113,10 @@ void update(int i,int C)
     }
     for(k=0;k<C-1;k++)
     {
-        printf("%g",num[k]);
+        printf("%g ",num[k]);
         if(symbols[k]!='=')
         {
-            printf("%c",symbols[k]);
+            printf("%c ",symbols[k]);
         }
     }
     printf("\n");
