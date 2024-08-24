@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include<string.h>
+#include <string.h>
 #include <ctype.h>
 
-float store_data();
-float result(int C);
+void store_data();
+void results(int C);
+void update(int i,int C);
 
 char equation[100],symbols[100];
 float num[100];
@@ -13,7 +14,6 @@ int main()
     int i=0;
     char ch;
     printf("Enter the expression: ");
-    //scanf("%[^\n]s", equation);
     while((ch=getchar()))
     {
         if(ch == '=')
@@ -24,11 +24,11 @@ int main()
         i++;
     }
     equation[i]='=';
-    printf(" %f ",store_data());
+    store_data();
     return 0;
 }
 
-float store_data()
+void store_data()
 {
     int i,n=0,temp=1,N=0,C=0;
     for(i=0;i<strlen(equation);i++)
@@ -48,20 +48,25 @@ float store_data()
             C++;
         }
     }
-    return result(C);
+    results(C);
 }
 
-float result(int C)
+float result;
+
+void results(int C)
 {
     int i,N;
-    float result=0;
     for(i=0;i<C;i++)
     {
         if(symbols[i] == '/')
         {
+            if(num[i+1]==0)
+            {
+                printf("----zero division error----");
+                exit(1);
+            }
             result = num[i]/num[i+1];
-            num[i]=result;
-            num[i+1]=result;
+            update(i,C);
         }
     }
 
@@ -70,8 +75,7 @@ float result(int C)
         if(symbols[i] == '*')
         {
             result = num[i]*num[i+1];
-            num[i]=result;
-            num[i+1]=result;
+            update(i,C);
         }
     }
 
@@ -80,8 +84,7 @@ float result(int C)
         if(symbols[i] == '+')
         {
             result = num[i]+num[i+1];
-            num[i]=result;
-            num[i+1]=result;
+            update(i,C);
         }
     }
 
@@ -90,9 +93,32 @@ float result(int C)
         if(symbols[i] == '-')
         {
             result = num[i]-num[i+1];
-            num[i]=result;
-            num[i+1]=result;
+            update(i,C);
         }
     }
-    return result;
+}
+
+void update(int i,int C)
+{
+    int j,k;
+    num[i]=result;
+    for(j=i+1;j<C;j++)
+    {
+        num[j]=num[j+1];
+    }
+    for(j=i;j<=C;j++)
+    {
+        symbols[j]=symbols[j+1];
+    }
+    for(k=0;k<C-1;k++)
+    {
+        printf("%g",num[k]);
+        if(symbols[k]!='=')
+        {
+            printf("%c",symbols[k]);
+        }
+    }
+    printf("\n");
+    results(C-1);
+    
 }
