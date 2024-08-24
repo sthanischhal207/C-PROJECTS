@@ -13,7 +13,7 @@ int main()
 {
     int i=0;
     char ch;
-    printf("NOTE: DONT FORGET TO ENTER = SIGN AT THE END OF EQUATION\n");
+    printf("NOTE: DONT FORGET TO ENTER = SIGN AT THE END OF EXPRESSION\n");
     printf("Enter the expression: ");
     while((ch=getchar()))
     {
