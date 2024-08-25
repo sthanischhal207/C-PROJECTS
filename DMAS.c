@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 
-void store_data();
 void results(int C);
 void update(int i,int C);
 
@@ -15,41 +14,14 @@ int main()
     char ch;
     printf("NOTE: DONT FORGET TO ENTER = SIGN AT THE END OF EXPRESSION\n");
     printf("Enter the expression: ");
-    while((ch=getchar()))
+    while(symbols[i-1] != '=')
     {
-        if(ch == '=')
-        {
-            break;
-        }
-        equation[i]=ch;
+        scanf("%f",&num[i]);
+        scanf("%c",&symbols[i]);
         i++;
     }
-    equation[i]='=';
-    store_data();
+    results(strlen(symbols));
     return 0;
-}
-
-void store_data()
-{
-    int i,n=0,temp=1,N=0,C=0;
-    for(i=0;i<strlen(equation);i++)
-    {
-        if(isdigit(equation[i]))
-        {
-           n = n*temp + (equation[i] - '0');
-           temp*=10;
-        }
-        else if(ispunct(equation[i]))
-        {
-            num[N]= n;
-            N++;
-            n=0;
-            temp=1;
-            symbols[C] = equation[i];
-            C++;
-        }
-    }
-    results(C);
 }
 
 float result;
@@ -101,7 +73,7 @@ void results(int C)
 
 void update(int i,int C)
 {
-    int j,k;
+    int j;
     num[i]=result;
     for(j=i+1;j<C;j++)
     {
@@ -111,15 +83,14 @@ void update(int i,int C)
     {
         symbols[j]=symbols[j+1];
     }
-    for(k=0;k<C-1;k++)
+    for(j=0;j<C-1;j++)
     {
-        printf("%g ",num[k]);
-        if(symbols[k]!='=')
+        printf("%g ",num[j]);
+        if(symbols[j]!='=')
         {
-            printf("%c ",symbols[k]);
+            printf("%c ",symbols[j]);
         }
     }
     printf("\n");
     results(C-1);
-    
 }
