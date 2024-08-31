@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 void results(int C);
 void update(int i,int C);
@@ -11,9 +10,8 @@ float num[100];
 int main()
 {
     int i=0;
-    char ch;
     printf("NOTE: DONT FORGET TO ENTER = SIGN AT THE END OF EXPRESSION\n");
-    printf("Enter the expression: ");
+    printf("Enter the expression: \n");
     while(symbols[i-1] != '=')
     {
         scanf("%f",&num[i]);
@@ -28,7 +26,7 @@ float result;
 
 void results(int C)
 {
-    int i,N;
+    int i;
     for(i=0;i<C;i++)
     {
         if(symbols[i] == '/')
