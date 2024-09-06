@@ -796,7 +796,7 @@ void print_data(char word,int row)
 
         case 'X':
         case 'x':
-            for(i=0;i<0;i++)
+            for(i=0;i<20;i++)
             {
                 printf("%c", X[row][i]);
             }
