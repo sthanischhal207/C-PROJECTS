@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 void graphics();
 void game();
-void replace_box(int i, int j,int c);
+void replace_box(int i, int j);
 char win_loose_draw();
-void again();
-void board_re();
+void board_reset();
 int num_check(int n);
-
-static int data[9];
 
 static char board[5][65] = {
     "   |   |                    1 | 2 | 3 ",
@@ -18,82 +16,92 @@ static char board[5][65] = {
     "-----------                -----------",
     "   |   |                    7 | 8 | 9 ",
 };
-static int choice;
+
+static int data[9]; // Stores the number which have already been choosen
+static int cnt=0;   // Stores how many number have been choosen
+static int choice;  // Globally stores the value choosen by players
+
 
 int main()
 {
+    do{
+        board_reset();  //resets the board every time game starts
         printf("\n\n\t------WELCOME TO TIC TAC TOE------\n\n");
         graphics();
         printf("\n\nWE WILL BE STARTING FROM 'O'\n");
         game();
+        printf("\n\nDo You want To Play Again? (y/n): ");
+        fflush(stdin); //flushes out any new lines
+    }
+    while(tolower(getchar())=='y');
     return 0;
 }
-void again()
-{
-    getchar();
-    char ch;
-    printf("\n\nDo You want To Play Again? (y/n)\n ");
-    scanf("%c",&ch);
-    if(ch=='y')
-    {
-        board_re();
-        main();
-    }
-    else{
-        exit(0);
-    }
-}
-static int cnt=0;
 
-void game()
+
+
+void game()     //Contains Main Game Logic
 {
-    int i,j,x;
-    for(x=1;x<=9;x++){
+    int i,j;
+    while(cnt!=9){
+
         printf("\n\nPlayer ");
-        if(cnt % 2 == 0)
-        {
+        if(cnt % 2 == 0){   //Since we started from player O, Player O's trun will always be such that cnt % 2 == 0
             printf("O:\n");
         }
         else{
             printf("X:\n");
         }
+
         printf("Enter the number: ");
-        scanf("%d", &choice);
-        if(num_check(choice)==0){
-            data[cnt] = choice;
-            if(choice >= 1 && choice <= 3)
+        char local_choice;      
+        scanf(" %c",&local_choice);   //Takes a single char // space before %c to clear any new line // or we can use fflush(stdin);
+
+        if(isdigit(local_choice))   //Ensures Given data is an Integer
+        {
+
+            choice = local_choice - '0';    //converts char to int
+
+            if(num_check(choice)==0)    //Ensures choosen Integer is not choosen before
             {
-                i=0;
-                j=4*choice-3;
+
+                data[cnt] = choice;     //Storing the number choosen by the players
+
+                //Setting up row and column where the data is to be stored
                 cnt++;
-            }
-            else if(choice >= 4 && choice <= 6)
-            {
-                i=2;
-                j=4*(choice-3)-3;
-                cnt++;
-            }
-            else if(choice >= 7 && choice <= 9)
-            {
-                i=4;
-                j=4*(choice-6)-3;
-                cnt++;
+                if(choice >= 1 && choice <= 3){
+                    i=0;
+                    j=4*choice-3;
+                }
+                else if(choice >= 4 && choice <= 6){
+                    i=2;
+                    j=4*(choice-3)-3;
+                }
+                else if(choice >= 7 && choice <= 9){
+                    i=4;
+                    j=4*(choice-6)-3;
+                }
+                else{
+                    printf("\n\nChoose An Integer between 1-9 ");
+                    cnt--;
+                    data[cnt] = ' ';
+                } 
+
+                replace_box(i,j); // i represent row and j represent column
+
             }
             else{
-                printf("\n\nInalid choice");
-                game();
+                printf("\n%d has already been choosen, Choose another Number",choice);
             }
-            replace_box(i,j,cnt);
         }
         else{
-            printf("\n\n%d is already Choosen, Choose another Number",choice);
+            printf("\n\nChoose An Integer between 1-9 ");
         }
     }
 }
 
-void replace_box(int i, int j,int c)
+void replace_box(int i, int j)
 {
-    if( c % 2 == 0)
+    if( cnt % 2 == 0)
     {
         board[i][j] = 'X';
     }
@@ -101,22 +109,24 @@ void replace_box(int i, int j,int c)
     {
         board[i][j] = 'O';
     }
+
     graphics();
+
     char result = win_loose_draw();
+
     if(result != 'N')
     {
         printf("\n\nPlayer %c Wins!", result);
-        again();
+        cnt = 9;
 
     }
-    else if(result == 'N' && c==9)
+    else if(result == 'N' && cnt==9)
     {
         printf("\n\nGame is Draw");
-        again();
     }
 }
 
-char win_loose_draw()
+char win_loose_draw()   // Checks all the rows and comlumn for any potential winners if(yes) returns Either "O" or "X" else return "N" 
 {
     int i;
     for(i=0;i<=5;i+=2)
@@ -137,14 +147,14 @@ char win_loose_draw()
         {
             return board[0][1];
         }
-    else if(board[0][9]!=' ' && board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondry diagonal
+    else if(board[0][9]!=' ' && board[0][9] == board[2][5] && board[0][9] == board[4][1]) //Check secondary diagonal
         {
             return board[0][9];
         }
-    return 'N';
+    return 'N';     //Neither "O" nor "X" has won 
 }
 
-void graphics()
+void graphics()     //Prints the Game's Graphics
 {
     int i,j;
     printf("\n\n");
@@ -159,15 +169,10 @@ void graphics()
     }
 }
 
-int num_check(int n)
+
+int num_check(int n) //returns 1 if number has already be choosen else return 0
 {
     int i;
-    if(n==0)
-    {
-        printf("\n\nInvalid Input\n");
-        game();
-
-    }
     for(i=0;i<9;i++)
     {
         if(data[i]==n)
@@ -177,7 +182,10 @@ int num_check(int n)
     }
     return 0;
 }
-void board_re()
+
+
+
+void board_reset() //Resets all the data stored
 {
     int i,j;
     for (int i = 0; i < 5; i++) {
@@ -189,7 +197,7 @@ void board_re()
     }
     for(i=0;i<9;i++)
     {
-        data[i]= ' ';
+        data[i] = ' ' ;   //reset which number have been choosen
     }
-    cnt=0;
+    cnt=0;       //reset how many number have been choosen
 }
