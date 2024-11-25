@@ -72,41 +72,38 @@ void game()     //Contains Main Game Logic
         {
             choice = atoi(local_choice);  //converts char to int
 
-            if(num_check(choice)==0)    //Ensures choosen Integer is not choosen before
+            if(choice >= 1 && choice <= 9)    
             {
+                if(num_check(choice)==0)        //Ensures choosen Integer is not choosen before
+                {
 
-                data[cnt] = choice;     //Storing the number choosen by the players
+                    data[cnt] = choice;     //Storing the number choosen by the players
 
-                //Setting up row and column where the data is to be stored
-                cnt++;
-                if(choice >= 1 && choice <= 3){
-                    i=0;
-                    j=4*choice-3;
-                }
-                else if(choice >= 4 && choice <= 6){
-                    i=2;
-                    j=4*(choice-3)-3;
-                }
-                else if(choice >= 7 && choice <= 9){
-                    i=4;
-                    j=4*(choice-6)-3;
+                    //Setting up row and column where the data is to be stored
+                    cnt++;
+                    if(choice >= 1 && choice <= 3){
+                        i=0;
+                        j=4*choice-3;
+                    }
+                    else if(choice >= 4 && choice <= 6){
+                        i=2;
+                        j=4*(choice-3)-3;
+                    }
+                    else if(choice >= 7 && choice <= 9){
+                        i=4;
+                        j=4*(choice-6)-3;
+                    }
+                    
+                    replace_box(i,j); // i represent row and j represent column
+                
                 }
                 else{
-                    printf("\n\nChoose An Integer between 1-9 ");
-                    cnt--;
-                    data[cnt] = ' ';
-                } 
-
-                replace_box(i,j); // i represent row and j represent column
-
-            }
-            else{
-                printf("\n%d has already been choosen, Choose another Number",choice);
-            }
+                    printf("\n%d has already been choosen, Choose another Number",choice);
+                }
+                continue;
+            }  
         }
-        else{
             printf("\n\nChoose An Integer between 1-9 ");
-        }
     }
 }
 
