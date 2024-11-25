@@ -53,13 +53,24 @@ void game()     //Contains Main Game Logic
         }
 
         printf("Enter the number: ");
-        char local_choice;      
-        scanf(" %c",&local_choice);   //Takes a single char // space before %c to clear any new line // or we can use fflush(stdin);
+        char local_choice[30];      
+        scanf(" %[^\n]s", local_choice);   //Takes a single char // space before %c to clear any new line // or we can use fflush(stdin);
 
-        if(isdigit(local_choice))   //Ensures Given data is an Integer
+        int is_valid = 1;
+
+        for(int k=0 ;local_choice[k] != '\0'; k++)
         {
+            if(!isdigit(local_choice[k]))
+            {
+                is_valid = 0; // if any enity except int is entered makes it invalid 
+                break; 
+            }
+        }
 
-            choice = local_choice - '0';    //converts char to int
+
+        if(is_valid == 1)   //Ensures Given data is an Integer
+        {
+            choice = atoi(local_choice);  //converts char to int
 
             if(num_check(choice)==0)    //Ensures choosen Integer is not choosen before
             {
@@ -187,7 +198,6 @@ int num_check(int n) //returns 1 if number has already be choosen else return 0
 
 void board_reset() //Resets all the data stored
 {
-    int i,j;
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 65; j++) {
             if (board[i][j] == 'X' || board[i][j] == 'O'){
@@ -195,7 +205,7 @@ void board_reset() //Resets all the data stored
             }
         }
     }
-    for(i=0;i<9;i++)
+    for(int i=0;i<9;i++)
     {
         data[i] = ' ' ;   //reset which number have been choosen
     }
