@@ -1,4 +1,4 @@
-# Ellipse
+# Conics
 Let’s analyze it visually: 
 
 https://www.geogebra.org/calculator/pcsqn32e
