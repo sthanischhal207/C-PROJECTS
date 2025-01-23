@@ -21,16 +21,9 @@ https://www.geogebra.org/calculator/xsck5kwf
 2. Whispering galleries : https://www.geogebra.org/calculator/cfgzkrp2
 3. Elliptical Gears
     
-    [Pictures](https://www.notion.so/Pictures-182892d867a180e4951cea2108db0192?pvs=21)
-    
 4. To Destroy Kidney Stones
     
-    [Pictures](https://www.notion.so/Pictures-182892d867a180ca95e3e75e8ace06be?pvs=21)
-    
 5. Focus Lights
-    
-    [Pictures ](https://www.notion.so/Pictures-182892d867a180888ee1e6514375fdf7?pvs=21)
-    
 
 ## Interesting Question
 
